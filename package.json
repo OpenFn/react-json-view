@@ -1,7 +1,7 @@
 {
-    "name": "react-json-view",
-    "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-    "version": "1.21.3",
+    "name": "react-json-view-fork",
+    "description": "This is a fork from the original repo  by Mac Gainor here https://github.com/mac-s-g/react-json-view. Interactive react component for displaying javascript arrays and JSON objects.",
+    "version": "1.0.0",
     "main": "dist/main.js",
     "dependencies": {
         "flux": "^4.0.1",
@@ -93,11 +93,11 @@
         "treeview"
     ],
     "license": "MIT",
-    "author": "Mac Gainor",
+    "author": "Chaiwa Berian",
     "bugs": {
-        "url": "https://github.com/mac-s-g/react-json-view/issues"
+        "url": "https://github.com/chaiwa-berian/react-json-view-fork/issues"
     },
-    "homepage": "https://github.com/mac-s-g/react-json-view",
+    "homepage": "https://github.com/chaiwa-berian/react-json-view-fork",
     "directories": {
         "docs": "docs",
         "test": "test"
