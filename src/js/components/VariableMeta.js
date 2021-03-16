@@ -2,6 +2,7 @@ import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard';
+import CopyNodePath from './CopyNodePath';
 import { toType } from './../helpers/util';
 
 //icons
@@ -114,7 +115,9 @@ export default class extends React.PureComponent {
             enableClipboard,
             src,
             namespace,
-            rowHovered
+            rowHovered,
+            enableCopyNodePath,
+            copyPathLabel
         } = this.props;
         return (
             <div
@@ -126,6 +129,15 @@ export default class extends React.PureComponent {
             >
                 {/* size badge display */}
                 {this.getObjectSize()}
+                 {/* copy to clipboard icon */}
+                 {enableCopyNodePath ? (
+                    <CopyNodePath
+                        rowHovered={rowHovered}
+                        clickCallback={enableCopyNodePath}
+                        copyPathLabel={copyPathLabel}
+                        {...{ src, theme, namespace }}
+                    />
+                ) : null}
                 {/* copy to clipboard icon */}
                 {enableClipboard ? (
                     <CopyToClipboard

@@ -22,11 +22,14 @@ class ReactJsonView extends React.PureComponent {
             name: ReactJsonView.defaultProps.name,
             theme: ReactJsonView.defaultProps.theme,
             validationMessage: ReactJsonView.defaultProps.validationMessage,
+            path: ReactJsonView.defaultProps.path,
             // the state object also needs to remember the prev prop values, because we need to compare
             // old and new props in getDerivedStateFromProps().
             prevSrc: ReactJsonView.defaultProps.src,
             prevName: ReactJsonView.defaultProps.name,
-            prevTheme: ReactJsonView.defaultProps.theme
+            prevTheme: ReactJsonView.defaultProps.theme,
+            prevPath: ReactJsonView.defaultProps.path,
+
         };
     }
 
@@ -56,7 +59,10 @@ class ReactJsonView extends React.PureComponent {
         style: {},
         validationMessage: 'Validation Error',
         defaultValue: null,
-        displayArrayKey: true
+        displayArrayKey: true,
+        enableCopyNodePath: true,
+        path: '',
+        copyPathLabel:  'Copy path to clipboard'
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.
@@ -64,17 +70,20 @@ class ReactJsonView extends React.PureComponent {
         if (
             nextProps.src !== prevState.prevSrc ||
             nextProps.name !== prevState.prevName ||
-            nextProps.theme !== prevState.prevTheme
+            nextProps.theme !== prevState.prevTheme ||
+            nextProps.path !== prevState.prevPath
         ) {
             // if we pass in new props, we re-validate
             const newPartialState = {
                 src: nextProps.src,
                 name: nextProps.name,
                 theme: nextProps.theme,
+                path: nextProps.path,
                 validationMessage: nextProps.validationMessage,
                 prevSrc: nextProps.src,
                 prevName: nextProps.name,
-                prevTheme: nextProps.theme
+                prevTheme: nextProps.theme,
+                prevPath: nextProps.path,
             };
             return ReactJsonView.validateState(newPartialState);
         }
@@ -84,6 +93,7 @@ class ReactJsonView extends React.PureComponent {
     componentDidMount() {
         // initialize
         ObjectAttributes.set(this.rjvId, 'global', 'src', this.state.src);
+        ObjectAttributes.set(this.rjvId, 'global', 'path', this.state.path);
         // bind to events
         const listeners = this.getListeners();
         for (const i in listeners) {
@@ -110,6 +120,9 @@ class ReactJsonView extends React.PureComponent {
         }
         if (prevProps.src !== this.state.src) {
             ObjectAttributes.set(this.rjvId, 'global', 'src', this.state.src);
+        }
+        if (prevProps.path !== this.state.path) {
+            ObjectAttributes.set(this.rjvId, 'global', 'path', this.state.path);
         }
     }
 
@@ -165,7 +178,7 @@ class ReactJsonView extends React.PureComponent {
             addKeyRequest,
             theme,
             src,
-            name
+            name,
         } = this.state;
 
         const { style, defaultValue } = this.props;

@@ -30,7 +30,7 @@ class Demo extends React.PureComponent {
         enableClipboard: true,
         indentWidth: 4,
         displayDataTypes: true,
-        iconStyle: 'triangle'
+        iconStyle: 'triangle',
     };
 
     render() {
@@ -46,7 +46,7 @@ class Demo extends React.PureComponent {
             iconStyle,
             collapsed,
             indentWidth,
-            displayDataTypes
+            displayDataTypes,
         } = this.state;
         const style = {
             padding: '10px',

@@ -6,7 +6,7 @@ import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
-
+import CopyNodePath from './CopyNodePath';
 //data type components
 import {
     JsonBoolean,
@@ -55,7 +55,9 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            enableCopyNodePath,
+            copyPathLabel
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -129,6 +131,16 @@ class VariableEditor extends React.PureComponent {
                 >
                     {this.getValue(variable, editMode)}
                 </div>
+                {enableCopyNodePath ? (
+                    <CopyNodePath
+                        rowHovered={this.state.hovered}
+                        hidden={editMode}
+                        src={variable.value}
+                        clickCallback={enableCopyNodePath}
+                        copyPathLabel={copyPathLabel}
+                        {...{ theme, namespace: [...namespace, variable.name] }}
+                    />
+                ) : null}
                 {enableClipboard ? (
                     <CopyToClipboard
                         rowHovered={this.state.hovered}
