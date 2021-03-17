@@ -25,7 +25,13 @@ export default class extends React.PureComponent {
         }
     }
 
-    getPath = (namespace) => `['${namespace.join("']['")}']`
+    getPath = (namespace) => {
+       const root = namespace[0];
+       const tail = namespace.slice(1,);
+       const path = `['${tail?.join("']['")}']`;
+
+       return (tail?.length > 0 ? root + path : root)
+      }
 
     handleCopy = () => {
         const container = document.createElement('textarea');
@@ -47,7 +53,6 @@ export default class extends React.PureComponent {
         }, 5500);
 
         this.setState({ copiedPath: true }, () => {
-           console.log('Copied node path:', path)
             if (typeof clickCallback !== 'function') {
                 return;
             }
