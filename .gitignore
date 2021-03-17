@@ -4,5 +4,5 @@ npm-debug.log
 /coverage
 /debug
 /node_modules
-
+/dist
 .nyc_output
