@@ -51,9 +51,6 @@ export default class extends React.PureComponent {
                 copiedPath: false
             });
         }, 1000);
-      // this.setState({
-      //    copiedPath: false
-      // });
 
         this.setState({ copiedPath: true }, () => {
             if (typeof clickCallback !== 'function') {
