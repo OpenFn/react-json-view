@@ -39,9 +39,9 @@ ReactDom.render(
                 console.log(e.namespace);
             }}
             displayObjectSize={true}
-            // displayDataTypes={true}
+            displayDataTypes={false}
             name={'state'}
-            // enableClipboard={true}
+            enableClipboard={false}
             enableCopyNodePath={true}
             
             enableClipboard={copy => {

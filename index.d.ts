@@ -76,6 +76,13 @@ export interface ReactJsonViewProps {
    */
   enableClipboard?: boolean | ((copy: OnCopyProps) => void);
   /**
+   * When prop is not false, the user can copy the json node path to clipboard by clicking on the clipboard icon.
+   * Copy callbacks are supported.
+   *
+   * Default: true
+   */
+   enableCopyNodePath?: boolean | ((copy: OnCopyNodePathProps) => void);
+  /**
    * When set to true, objects and arrays are labeled with size.
    *
    * Default: true
@@ -141,6 +148,12 @@ export interface ReactJsonViewProps {
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;
+  /**
+   * Custom label to display when user hovers on CopyNodePath icon
+   * 
+   * Default: Copy node path to clipboard
+   */
+  copyPathLabel?: string
 }
 
 export interface OnCopyProps {
@@ -157,6 +170,26 @@ export interface OnCopyProps {
    */
   name: string | null;
 }
+
+export interface OnCopyNodePathProps {
+   /**
+    * The JSON tree source object
+    */
+   src: object;
+   /**
+    * List of keys.
+    */
+   namespace: Array<string | null>;
+   /**
+    * The last key in the namespace array.
+    */
+   name: string | null;
+   /**
+    *  The path of the selected JSON node
+    */
+   path: string
+ }
+ 
 
 export interface CollapsedFieldProps {
   /**
