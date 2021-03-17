@@ -46,14 +46,14 @@ export default class extends React.PureComponent {
 
         document.body.removeChild(container);
 
-      //   this.copiedTimer = setTimeout(() => {
-      //       this.setState({
-      //           copiedPath: false
-      //       });
-      //   }, 5500);
-      this.setState({
-         copiedPath: false
-      });
+        this.copiedTimer = setTimeout(() => {
+            this.setState({
+                copiedPath: false
+            });
+        }, 1000);
+      // this.setState({
+      //    copiedPath: false
+      // });
 
         this.setState({ copiedPath: true }, () => {
             if (typeof clickCallback !== 'function') {
