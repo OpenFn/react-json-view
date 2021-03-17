@@ -89,7 +89,7 @@ describe("<Index />", function() {
                 }}
             />
         )
-        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(7)
+        expect(wrapper.find(".copy-to-clipboard-container")).to.have.length(14)
     })
 
     it("index test getDerivedStateFromProps", function() {
