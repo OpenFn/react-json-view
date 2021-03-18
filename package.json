@@ -1,7 +1,7 @@
 {
     "name": "@openfn/react-json-view",
     "description": "This is a fork from the original repo  by Mac Gainor here https://github.com/mac-s-g/react-json-view. Interactive react component for displaying javascript arrays and JSON objects.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "dist/main.js",
     "dependencies": {
         "flux": "^4.0.1",
