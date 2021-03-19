@@ -29,11 +29,9 @@ export default class extends React.PureComponent {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace, toClipboard } = this.props;
 
-        container.innerHTML = JSON.stringify(
-            this.clipboardValue(src, namespace, toClipboard),
-            null,
-            '  '
-        );
+        const value = this.clipboardValue(src, namespace, toClipboard);
+
+        container.innerHTML = JSON.stringify(value, null, '  ');
 
         document.body.appendChild(container);
         container.select();
@@ -55,7 +53,8 @@ export default class extends React.PureComponent {
             clickCallback({
                 src: src,
                 namespace: namespace,
-                name: namespace[namespace.length - 1]
+                name: namespace[namespace.length - 1],
+                clipboardValue: value
             });
         });
     };

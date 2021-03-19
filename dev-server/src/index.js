@@ -40,10 +40,10 @@ ReactDom.render(
             }}
             displayObjectSize={true}
             name={'dev-server'}
-            // enableClipboard={copy => {
-            //     console.log('you copied to clipboard!', copy);
-            // }}
-            enableClipboard={true}
+            enableClipboard={copy => {
+                console.log('you copied to clipboard!', copy);
+            }}
+            // enableClipboard={true}
             toClipboard={({ src, namespace }) => {
                 // return src; // for the value
                 return namespace.join('/');
