@@ -45,10 +45,14 @@ ReactDom.render(
             // enableCopyNodePath={copy=>{
             //    console.log('copied', copy)
             // }}
-            
+            enableCopyNodePath={true}
             // enableClipboard={copy => {
             //     console.log('you copied to clipboard!', copy);
             // }}
+            onCustomPath={({name, namespace, src}) =>{
+               return namespace.join('/');
+            }}
+            // onCustomPath={()=>"test"}
             shouldCollapse={({ src, namespace, type }) => {
                 if (type === 'array' && src.indexOf('test') > -1) {
                     return true;

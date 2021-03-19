@@ -33,37 +33,80 @@ export default class extends React.PureComponent {
        return (tail?.length > 0 ? root + path : root)
       }
 
+    copy =  (copyText)  =>{
+      const container = document.createElement('textarea');
+      container.innerHTML = copyText;
+
+      document.body.appendChild(container);
+      container.select();
+      document.execCommand('copy');
+
+      document.body.removeChild(container);
+
+      this.copiedTimer = setTimeout(() => {
+          this.setState({
+              copiedPath: false
+          });
+      }, 1000);
+
+    }
+
+    updateCopyState = ({src,namespace,name,path}) => {
+      const {clickCallback}  = this.props;
+
+      this.setState({ copiedPath: true }, () => {
+         if (typeof clickCallback !== 'function') {
+             return;
+         }
+
+         clickCallback({
+             src,
+             namespace,
+             name,
+             path
+         });
+     });
+    }
+
+    defaultCopyPath = ({src, namespace}) => {
+      const name =  namespace[namespace.length - 1];
+      const path = this.getPath(namespace);
+
+      this.copy(path);
+
+      this.updateCopyState(
+         {
+            src,
+            namespace,
+            name,
+            path
+         });     
+    }
+
+    customCopyPath = ({src, namespace}, callback) => {
+      const name =  namespace[namespace.length - 1];
+      const path = callback({src, namespace, name});
+
+      this.copy(path);
+
+      this.updateCopyState(
+         {
+            src,
+            namespace,
+            name,
+            path
+         });     
+    }
+
     handleCopy = () => {
-        const container = document.createElement('textarea');
-        const { clickCallback, src, namespace } = this.props;
-        const path = this.getPath(namespace);
+       const {src, namespace } = this.props;
+       const {onCustomPath} = this.props;
 
-        container.innerHTML = path;
-
-        document.body.appendChild(container);
-        container.select();
-        document.execCommand('copy');
-
-        document.body.removeChild(container);
-
-        this.copiedTimer = setTimeout(() => {
-            this.setState({
-                copiedPath: false
-            });
-        }, 1000);
-
-        this.setState({ copiedPath: true }, () => {
-            if (typeof clickCallback !== 'function') {
-                return;
-            }
-
-            clickCallback({
-                src: src,
-                namespace: namespace,
-                name: namespace[namespace.length - 1],
-                path: path
-            });
-        });
+       if (typeof onCustomPath !== 'function') {
+         return this.defaultCopyPath({src, namespace})
+      } else {
+         return this.customCopyPath({src,namespace}, onCustomPath)
+      }
     };
 
     getClippyIcon = () => {

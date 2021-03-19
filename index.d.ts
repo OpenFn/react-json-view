@@ -78,10 +78,24 @@ export interface ReactJsonViewProps {
   /**
    * When prop is not false, the user can copy the json node path to clipboard by clicking on the clipboard icon.
    * Copy callbacks are supported.
+   * By default, the path returned is in the format: `root['child_node']['grand_child_node'].
+   * You can customise the calculation for the path by using the `onCustomPath` prop. 
    *
    * Default: true
    */
-   enableCopyNodePath?: boolean | ((copy: OnCopyNodePathProps) => void);
+  enableCopyNodePath?: boolean | ((copy: OnCopyNodePathProps) => void);
+   /**
+    * When `enableCopyNodePath` is `true`, the user can use this `prop` to return a custom node path.
+    * Pass a function that returns your custom node path.
+    * Example:
+    * onCustomPath={({src,name,namespace}) => {
+    *    return namespace.join('/');
+    * }}
+    * The returned custom path value will then be copied to clipboard passed on to callback(if any) set by enableCopyNodePath.
+    * 
+    * Default: null
+    */
+  onCustomPath?: ((copy: OnCopyProps) => string);
   /**
    * When set to true, objects and arrays are labeled with size.
    *

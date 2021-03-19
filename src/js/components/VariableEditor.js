@@ -57,7 +57,8 @@ class VariableEditor extends React.PureComponent {
             displayArrayKey,
             quotesOnKeys,
             enableCopyNodePath,
-            copyPathLabel
+            copyPathLabel,
+            onCustomPath
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -138,6 +139,7 @@ class VariableEditor extends React.PureComponent {
                         src={variable.value}
                         clickCallback={enableCopyNodePath}
                         copyPathLabel={copyPathLabel}
+                        onCustomPath={onCustomPath}
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}

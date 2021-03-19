@@ -62,7 +62,8 @@ class ReactJsonView extends React.PureComponent {
         displayArrayKey: true,
         enableCopyNodePath: true,
         path: '',
-        copyPathLabel:  'Copy path to clipboard'
+        copyPathLabel:  'Copy path to clipboard',
+        onCustomPath: null
     };
 
     // will trigger whenever setState() is called, or parent passes in new props.

@@ -117,7 +117,8 @@ export default class extends React.PureComponent {
             namespace,
             rowHovered,
             enableCopyNodePath,
-            copyPathLabel
+            copyPathLabel,
+            onCustomPath
         } = this.props;
         return (
             <div
@@ -135,6 +136,7 @@ export default class extends React.PureComponent {
                         rowHovered={rowHovered}
                         clickCallback={enableCopyNodePath}
                         copyPathLabel={copyPathLabel}
+                        onCustomPath={onCustomPath}
                         {...{ src, theme, namespace }}
                     />
                 ) : null}
