@@ -112,6 +112,7 @@ export default class extends React.PureComponent {
             onDelete,
             onAdd,
             enableClipboard,
+            toClipboard,
             src,
             namespace,
             rowHovered
@@ -130,6 +131,7 @@ export default class extends React.PureComponent {
                 {enableClipboard ? (
                     <CopyToClipboard
                         rowHovered={rowHovered}
+                        toClipboard={toClipboard}
                         clickCallback={enableClipboard}
                         {...{ src, theme, namespace }}
                     />

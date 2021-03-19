@@ -75,16 +75,18 @@ export default class extends React.PureComponent {
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
     };
 
-    clipboardValue = (src, namespace, customFunction) => {
-        if (customFunction) return customFunction({src, namespace});
-        
-        const type = toType(src);
-        switch (type) {
-            case 'function':
-            case 'regexp':
-                return src.toString();
-            default:
-                return src;
+    clipboardValue = (src, namespace, toClipboard) => {
+        if (toClipboard) {
+            return toClipboard({ src, namespace });
+        } else {
+            const type = toType(src);
+            switch (type) {
+                case 'function':
+                case 'regexp':
+                    return src.toString();
+                default:
+                    return src;
+            }
         }
     };
 
