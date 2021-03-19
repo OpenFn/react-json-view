@@ -27,10 +27,10 @@ export default class extends React.PureComponent {
 
     handleCopy = () => {
         const container = document.createElement('textarea');
-        const { clickCallback, src, namespace } = this.props;
+        const { clickCallback, src, namespace, toClipboard } = this.props;
 
         container.innerHTML = JSON.stringify(
-            this.clipboardValue(src),
+            this.clipboardValue(src, namespace, toClipboard),
             null,
             '  '
         );
@@ -75,14 +75,16 @@ export default class extends React.PureComponent {
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
     };
 
-    clipboardValue = value => {
-        const type = toType(value);
+    clipboardValue = (src, namespace, customFunction) => {
+        if (customFunction) return customFunction({src, namespace});
+        
+        const type = toType(src);
         switch (type) {
             case 'function':
             case 'regexp':
-                return value.toString();
+                return src.toString();
             default:
-                return value;
+                return src;
         }
     };
 

@@ -43,6 +43,10 @@ ReactDom.render(
             enableClipboard={copy => {
                 console.log('you copied to clipboard!', copy);
             }}
+            // enableClipboard={true}
+            toClipboard={({namespace})=>{
+               return namespace.join('/')
+            }}
             shouldCollapse={({ src, namespace, type }) => {
                 if (type === 'array' && src.indexOf('test') > -1) {
                     return true;

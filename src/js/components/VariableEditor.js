@@ -55,7 +55,8 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            toClipboard
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -135,6 +136,7 @@ class VariableEditor extends React.PureComponent {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
+                        toClipboard={toClipboard}
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}

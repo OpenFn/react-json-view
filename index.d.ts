@@ -128,6 +128,17 @@ export interface ReactJsonViewProps {
    *
    * Default: "Validation Error"
    */
+  /**
+    * When `enableClipboard` is `true`, the user can use this `prop` to return a custom node path.
+    * Pass a function that returns your custom node path.
+    * Example:
+    * toClipboard={({src,name,namespace}) => {
+    *    return namespace.join('/');
+    * }}
+    * 
+    * Default: null
+    */
+  toClipboard?: ((copy: OnCopyProps) => void);
   validationMessage?: string;
   /**
    * Set to true to sort object keys.
