@@ -29,9 +29,11 @@ export default class extends React.PureComponent {
         const container = document.createElement('textarea');
         const { clickCallback, src, namespace, toClipboard } = this.props;
 
-        const value = this.clipboardValue(src, namespace, toClipboard);
+        const value = toClipboard
+            ? toClipboard({ src, namespace })
+            : JSON.stringify(this.clipboardValue(src), null, ' ');
 
-        container.innerHTML = JSON.stringify(value, null, '  ');
+        container.innerHTML = value;
 
         document.body.appendChild(container);
         container.select();
@@ -74,18 +76,14 @@ export default class extends React.PureComponent {
         return <Clippy class="copy-icon" {...Theme(theme, 'copy-icon')} />;
     };
 
-    clipboardValue = (src, namespace, toClipboard) => {
-        if (toClipboard) {
-            return toClipboard({ src, namespace });
-        } else {
-            const type = toType(src);
-            switch (type) {
-                case 'function':
-                case 'regexp':
-                    return src.toString();
-                default:
-                    return src;
-            }
+    clipboardValue = value => {
+        const type = toType(value);
+        switch (type) {
+            case 'function':
+            case 'regexp':
+                return value.toString();
+            default:
+                return value;
         }
     };
 
